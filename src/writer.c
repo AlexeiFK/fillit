@@ -6,13 +6,14 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:14:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/15 13:17:05 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/15 14:17:26 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include "libft.h"
 
 int		reader(int fd)
 {

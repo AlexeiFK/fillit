@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 21:23:39 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/15 13:14:50 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/15 14:16:01 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ int		to_find(char *str, int i)
 		return (horz_like(str, i));
 	if (down_right(str, i) == 1)
 		return (vert_like(str, i));
+	return (0);
 }
