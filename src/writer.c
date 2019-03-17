@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:14:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/15 15:46:16 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/17 18:16:16 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,38 @@ int		reader(int fd)
 	free(str);
 	return (ret);
 }
+
+void		to_free(t_fig **fig)
+{
+	int		i;
+
+	i = 0;
+	while (*fig[i] != NULL)
+	{
+		free(*fid[i]);
+		i++;
+	}
+	free(**fig);
+}
+
+t_fig		*writer(int num)
+{
+	t_fig		**figs;
+	int			i;
+
+	i = 0;
+
+	if (!(figs = (t_fig**)malloc(sizeof(t_fig*) * 27)))
+		return (NULL);
+	while (i < 27)
+	{
+		if (!(*figs[i] = (t_fig*)malloc(sizeof(t_fig))))
+		{
+			to_free(figs);
+			return (NULL);
+		}
+		i++;
+	}
+}
+
+char	
