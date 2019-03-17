@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:14:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/17 18:16:16 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/17 19:07:42 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <fcntl.h>
 #include "libft.h"
 #include <stdio.h>
+
+int		g_figs[26];
 
 int		reader(int fd)
 {
@@ -41,6 +43,22 @@ int		reader(int fd)
 	return (ret);
 }
 
+void		get_figures(int fd)
+{
+	int		ret;
+	int		i;
+
+	i = 0;
+	ret = reader(fd);
+	while ((i < 26) && (ret != -1))
+	{
+		g_figs[i] = ret;
+		ret = reader(fd);
+		i++;
+	}
+}
+
+/*
 void		to_free(t_fig **fig)
 {
 	int		i;
@@ -73,5 +91,5 @@ t_fig		*writer(int num)
 		i++;
 	}
 }
+*/
 
-char	
