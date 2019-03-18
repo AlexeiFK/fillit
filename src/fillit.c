@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:51:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/17 22:08:57 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/18 22:02:29 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,60 @@
 #include <stdlib.h>
 #include "fillit.h"
 
-void		add_figure(char **map, int size, int fig)
+void		add_figure(char **map, int id)
 {
 	int		i;
 	int		j;
 	int		ret;
 
 	i = 0;
-	while (i < size)
+	while (i < g_size)
 	{
 		j = 0;
-		while (j < size)
+		while (j < g_size)
 		{
-			if (map[i][j] != '#')
-				ret = num_to_fig(map, i, j, fig);
-			if (ret == 1)
-				return;
+			if (map[i][j] == '.')
+			{
+				if (check_space(map, i, j, id) == 1)
+					write_in();
+			}
 			j++;
 		}
 		i++;
 	}
-	
 }
 
+int		check_space(char **map, int i, int j, int id)
+{
+	int			t_i;
+	int			t_j;
+
+	t_i = 0;
+	while (t_i < 4)
+	{
+		t_j = 0;
+		j =- 4;
+		while (t_j < 4)
+		{
+			if (g_tetr_arr[id]->arr[t_i][t_j] != '#')
+			{	
+				if (map[i][j] != '.')
+					return (0);
+				if ((j + 1) >= g_size)
+					return (0);
+			}
+			j++;
+			t_j++;
+		}
+		i++;
+		t_i++;
+	}
+	return (1);
+}
+
+
+
+/*
 void		get_p(int *p[], int fig)
 {
 	i
@@ -58,7 +89,7 @@ int			num_to_fig(char **map, int i, int j, int fig)
 			if (((i + 1) > g_size) && ((i + 1) > g_size) && map[i + 1][j + 1] == '.')
 				ret = 1;
 }
-
+*/
 char		**create_map(int size)
 {
 	char	**map;

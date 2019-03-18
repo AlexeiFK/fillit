@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 21:23:39 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/15 16:06:34 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/18 18:56:28 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int		down_right(char *str, int i)
 int		l_like(char *str, int i)
 {
 	if (down_right(str, i + 10) == 2)
-		return (8);
+		return (16);
 	if (down_right(str, i + 10) == 1)
-		return (15);
+		return (2);
 	if (str[i + 9] == '#')
-		return (9);
+		return (17);
 	if (str[i + 4] == '#')
 		return (13);
 	return (0);
@@ -42,11 +42,11 @@ int		vert_like(char *str, int i)
 	if (down_right(str, i + 5) == 2)
 	{
 		if (str[i + 4] == '#')
-			return (11);
+			return (8);
 		if (down_right(str, i + 6) == 2)
-			return (3); 
+			return (5); 
 		if (down_right(str, i + 6) == 1)
-			return (16);
+			return (19);
 	}
 	if (down_right(str, i + 5) == 3)
 		return (12);
@@ -55,9 +55,9 @@ int		vert_like(char *str, int i)
 	if (str[i + 4] == '#')
 	{
 		if (down_right(str, i + 4) == 3)
-			return (17);
+			return (18);
 		if (str[i + 3] == '#')
-			return (4);
+			return (6);
 	}
 	return (0);
 }
@@ -65,20 +65,20 @@ int		vert_like(char *str, int i)
 int		horz_like(char *str, int i)
 {
 	if (down_right(str, i + 1) == 3)
-		return (10);
+		return (9);
 	if (down_right(str, i + 1) == 2)
 	{
 		if (down_right(str, i + 2) == 2)
-			return (14);
+			return (3);
 		if (down_right(str, i + 2) == 1)
-			return (5);
+			return (7);
 	}
 	if (down_right(str, i + 1) == 1)
 	{
 		if (down_right(str, i + 6) == 1)
-			return (7);
+			return (15);
 		if (down_right(str, i + 6) == 2)
-			return (19);
+			return (11);
 	}
 	return (0);
 }
@@ -90,11 +90,11 @@ int		to_find(char *str, int i)
 		if (down_right(str, i + 1) == 1)
 			return (1);
 		if (down_right(str, i + 1) == 2)
-			return (2);
+			return (4);
 		if (down_right(str, i + 5) == 1)
-			return (6);
+			return (14);
 		if (str[i + 4] == '#')
-			return (18);
+			return (10);
 	}
 	if (down_right(str, i) == 2)
 		return (horz_like(str, i));

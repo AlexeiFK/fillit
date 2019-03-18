@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/17 21:34:07 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/18 21:15:44 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int		ft_sqrt(int num)
 
 	i = 1;
 	while (i*i < num)
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -58,13 +56,12 @@ int		main(int argc, char** argv)
 		i++;
 	}
 	g_size = ft_sqrt(i * 4);
-	map = create_map(size);
-
+	map = create_map(g_size);
 	i = 0;
-	while (i < size)
+	while (i < g_size)
 	{
 		j = 0;
-		while (j < size)
+		while (j < g_size)
 		{
 			ft_putchar(map[i][j]);
 			j++;
