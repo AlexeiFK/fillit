@@ -6,7 +6,7 @@
 #    By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/15 13:19:37 by rjeor-mo          #+#    #+#              #
-#    Updated: 2019/03/15 17:02:12 by rjeor-mo         ###   ########.fr        #
+#    Updated: 2019/03/18 19:48:49 by rjeor-mo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC= $(SDIR)reader.c \
 	 $(SDIR)main.c \
 	 $(SDIR)fillit.c \
 	 $(SDIR)valid.c \
-	 $(SDIR)get_next_line.c
+	 $(SDIR)get_next_line.c \
+	 $(SDIR)num_to_fig.c
 
 OBJ = $(subst .c,.o,$(subst src/,,$(SRC)))
 

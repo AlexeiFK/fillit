@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 20:29:29 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/18 21:01:07 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/20 22:26:29 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ int				is_valid(int fd);
 int				to_find(char *str, int i);
 void			get_figures(int fd);
 char			**create_map(int size);
+char			**fill_map(int size, int n_fig, int *flag);
+void			print_map(char **map, int i);
+int				add_figure(char **map, int id);
 
 #endif
