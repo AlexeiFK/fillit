@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:11:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/21 17:47:51 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/21 20:11:43 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "libft.h"
 #include <stdio.h>
 
-void		tetr_add(t_tetr *new, char *str)
+void		tetr_add(t_tetr *new, char *str, int start)
 {
 	int			i;
 	int			j;
@@ -28,8 +28,8 @@ void		tetr_add(t_tetr *new, char *str)
 
 	i = 0;
 	sh = 0;
-	mv = (g_start % 5) + 1;
-	k = g_start;
+	mv = (start % 5) + 1;
+	k = start;
 	while (i < 4 && (sh < 4))
 	{
 		j = 0;
@@ -55,7 +55,7 @@ void		tetr_add(t_tetr *new, char *str)
 	c++;
 }
 
-t_tetr		*create_tetr(int id, char *str)
+t_tetr		*create_tetr(int id, char *str, int start)
 {
 	t_tetr		*new;
 	int			i;
@@ -76,9 +76,9 @@ t_tetr		*create_tetr(int id, char *str)
 	}
 	i = 0;
 	id = 0;
-	tetr_add(new, str);
+	tetr_add(new, str, start);
 	i = 0;
-	while (i < 4)
+/*	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)
@@ -90,5 +90,6 @@ t_tetr		*create_tetr(int id, char *str)
 		i++;
 	}
 	ft_putchar('\n');
+	*/
 	return (new);
 }

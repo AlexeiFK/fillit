@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:51:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/20 19:48:26 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/21 18:27:49 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "fillit.h"
+
+int		g_size = 0;
 
 int		check_space(char **map, int i, int j, int id)
 {
@@ -149,6 +151,7 @@ char		**create_map(int size)
 	int		i;
 	int		j;
 
+	g_size = size;
 	map = (char**)malloc(sizeof(char*) * size);
 	i = 0;
 	while (i < size)
