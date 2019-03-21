@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:14:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/18 21:18:26 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/21 17:44:41 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		reader(int fd, char **str)
 	int		i;
 	int		ret;
 	int		ret2;
-//	t_tetr	*tetr;
 
 	i = 0;
 	*str = ft_strnew(20);
@@ -39,8 +38,6 @@ int		reader(int fd, char **str)
 		i++;
 	ret = to_find(*str, i);
 	g_start = i;
-//	tetr = create_tetr(ret, str);
-//	read(fd, str, 1);
 	return (ret);
 }
 
@@ -56,8 +53,6 @@ void		get_figures(int fd)
 	while ((i < 26) && (ret != -1))
 	{
 		ret = reader(fd, &str);
-	//ft_putstr("TEST!!!\n");
-	//ft_putstr(str);
 		g_figs[i] = ret;
 		if (ret == 8 || ret == 10 || ret == 13 || ret == 17 || ret == 18)
 			g_start--;
@@ -69,39 +64,3 @@ void		get_figures(int fd)
 		i++;
 	}
 }
-
-/*
-void		to_free(t_fig **fig)
-{
-	int		i;
-
-	i = 0;
-	while (*fig[i] != NULL)
-	{
-		free(*fid[i]);
-		i++;
-	}
-	free(**fig);
-}
-
-t_fig		*writer(int num)
-{
-	t_fig		**figs;
-	int			i;
-
-	i = 0;
-
-	if (!(figs = (t_fig**)malloc(sizeof(t_fig*) * 27)))
-		return (NULL);
-	while (i < 27)
-	{
-		if (!(*figs[i] = (t_fig*)malloc(sizeof(t_fig))))
-		{
-			to_free(figs);
-			return (NULL);
-		}
-		i++;
-	}
-}
-*/
-

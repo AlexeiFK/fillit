@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/20 22:34:12 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/21 17:42:43 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <fcntl.h>
 
 int		g_size = 0;
+int		g_result = 0;
 
 void	printArray()
 {
@@ -56,10 +57,7 @@ void	permute(int i, int length)
 		{
 			ft_putchar('\n');
 			print_map(map, g_size);
-	//		exit(1);
 		}
-//		ft_putnbr(flag);
-//		ft_putchar('\n');
 		return ;
 	}
 	j = i;
@@ -129,7 +127,6 @@ int		main(int argc, char** argv)
 	int		fd;
 	int		ret;
 	int		i;
-//	int		j;
 	int		size;
 	char	**map;
 
@@ -145,7 +142,7 @@ int		main(int argc, char** argv)
 	get_figures(fd);
 	while ((i < 26) && (g_figs[i] > 0))
 	{
-		printf("[%d] = %d\n", i, g_figs[i]);
+	//	printf("[%d] = %d\n", i, g_figs[i]);
 		i++;
 	}
 	g_size = ft_sqrt(i * 4);
