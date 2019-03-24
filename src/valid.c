@@ -6,10 +6,11 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:54:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/15 14:21:11 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/24 18:37:32 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
 #include "get_next_line.h"
 #include "libft.h"
 
@@ -59,14 +60,54 @@ int			checker(int fd, int n_tetr, int n_sharp, char *str)
 	return (1);
 }
 
-int			is_valid(int fd)
+int			checker_plus(int fd, char *str)
+{
+	int		i;
+	int		n_figs;
+
+	n_figs = 1;
+	i = 0;
+	while (get_next_line(fd, &str) == 1)
+	{
+		if ((ft_strlen(str) == 4) && (i < 4))
+		{
+			i++;
+		}
+		else
+		{
+			if (ft_strlen(str) != 0)
+			{
+				return (0);
+			}
+			n_figs++;
+			i = 0;
+		}
+		free(str);
+	}
+	free(str);
+	return (n_figs);
+}
+
+int			is_valid(char *filename)
 {
 	char	*str;
 	int		n_tetr;
 	int		n_sharp;
+	int		fd;
+	int		ret;
 
+	fd = open(filename, O_RDONLY);
 	str = NULL;
 	n_sharp = 0;
 	n_tetr = 0;
-	return (checker(fd, n_tetr, n_sharp, str));
+	if ((checker(fd, n_tetr, n_sharp, str)) == 0)
+		return (0);
+	close(fd);
+	fd = open(filename, O_RDONLY);
+	str = NULL;
+	n_sharp = 0;
+	n_tetr = 0;
+	ret = (checker_plus(fd, str));
+	close(fd);
+	return (ret);
 }

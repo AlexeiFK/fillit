@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:51:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/21 18:27:49 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/24 17:39:14 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,13 @@ void		write_in_map(char **map, int i, int j, int id)
 
 //	printf("write in i = %d, j = %d\n", i, j);
 	if (g_tetr_arr[id]->arr[0][0] == '.')
+	{
+		if (g_tetr_arr[id]->arr[0][1] == '.')
+			j--;
 		j--;
+	}
+//	if (g_tetr_arr[id]->arr[0][1] == '.')
+//		j--;
 	t_i = 0;
 	while (t_i < 4)
 	{

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:14:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/21 18:03:53 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/24 19:01:02 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		reader(int fd, char **str, int *start)
 	return (ret);
 }
 
-void		get_figures(int fd)
+int		get_figures(int fd)
 {
 	int		ret;
 	int		i;
@@ -53,7 +53,8 @@ void		get_figures(int fd)
 	start = 0;
 	while ((i < 26) && (ret != -1))
 	{
-		ret = reader(fd, &str, &start);
+		if ((ret = reader(fd, &str, &start)) == 0)
+			break ;
 		g_figs[i] = ret;
 		if (ret == 8 || ret == 10 || ret == 13 || ret == 17 || ret == 18)
 			start--;
@@ -64,4 +65,5 @@ void		get_figures(int fd)
 		free(str);
 		i++;
 	}
+	return (i - 1);
 }

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:33:03 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/21 18:34:58 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/24 20:04:03 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_map(char **map, int size)
 	}
 }
 
-char	**fill_map(int size, int n_fig, int *flag)
+char	**fill_map(int size, int n_fig, int *flag) // int shift)
 {
 	int		i;
 	int		ret;
@@ -62,10 +62,19 @@ char	**fill_map(int size, int n_fig, int *flag)
 	map = create_map(size);
 	while (ret && (i < n_fig))
 	{
+		print_map(map, size);
 		ret = add_figure(map, i);
 		i++;
 	}
+	ft_putstr("_____________________\n");
 	if (ret == 1)
+	{
 		*flag = 1;
-	return (map);
+	}
+		return (map);
+//	}
+//	else
+//	{
+//		map = fill_map(size, n_fig, flag, shift);
+//	}
 }

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 20:29:29 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/21 20:07:00 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/24 18:38:50 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ extern int		g_result;
 
 t_tetr			*create_tetr(int id, char *str, int start);
 void			tetr_add(t_tetr *tetr, char *str, int start);
-int				is_valid(int fd);
+int				is_valid(char *filename);
 int				to_find(char *str, int i);
-void			get_figures(int fd);
+int				get_figures(int fd);
 char			**create_map(int size);
 char			**fill_map(int size, int n_fig, int *flag);
 void			print_map(char **map, int i);

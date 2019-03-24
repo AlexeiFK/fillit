@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/21 20:10:05 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/24 19:41:39 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	permute(int size, int i, int length, int *res)
 //			ft_putchar('\n');
 			//print_map(map, size);
 			tmp_value = get_result(map, size);
+				print_map(map, size);
+				exit(0);
 			if (value > tmp_value)
 			{
 			//	print_map(map, size);
@@ -90,6 +92,7 @@ int		main(int argc, char** argv)
 {
 	int		fd;
 	int		i;
+//	int		j;
 	int		res;
 	int		size;
 	int		tmp;
@@ -102,13 +105,24 @@ int		main(int argc, char** argv)
 		return (0);
 	}
 	i = 0;
+	if (is_valid(argv[1]) == 0)
+	{
+		ft_putstr("error");
+		exit(0);
+	}
 	fd = open(argv[1], O_RDONLY);
-//	printf("valid = %d\n", is_valid(fd));
-	close(fd);
-	fd = open(argv[1], O_RDONLY);
-	get_figures(fd);
-	while ((i < 26) && (g_figs[i] > 0))
-		i++;
+	i = get_figures(fd);
+	if (i != is_valid(argv[1]))
+	{
+		ft_putstr("error");
+		exit(0);
+	}
+//	j = 0;
+//	while ((j < 26) && (g_figs[j] > 0))
+//	{
+//		printf("[%d] = %d\n", j, g_figs[j]);
+//		j++;
+//	}
 	size = ft_sqrt_map(i * 4);
 	tmp = i;
 	while (res == 0)
@@ -119,7 +133,6 @@ int		main(int argc, char** argv)
 		size = ft_sqrt_map(tmp * 4);
 	}
 	print_map(g_map, size);
-//	printf("RES = %d\n", res);
 	close(fd);
 	return (0);
 }
