@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/24 19:41:39 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/24 23:24:31 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,26 @@ int		get_result(char **map, int size)
 	return (val);
 }
 
-void	permute(int size, int i, int length, int *res) 
+void	permute(int size, int i, int length, int *res, int shift) 
 {
 	int			j;
 	char		**map;
 	int			flag;
 	static int	value = VALUE_MAX;
 	int			tmp_value;
+//	int			shift;
 
+//	shift = 0;
 	if (length == i)
 	{
 		flag = 0;
-		map = fill_map(size, length, &flag);
+//		while (shift < size*size)
+//		{
+			map = fill_map(size, length, &flag, shift);
+			shift++;
+//			if (flag)
+//				break ;
+//		}
 		if (flag)
 		{
 			*res = 1;
@@ -66,6 +74,8 @@ void	permute(int size, int i, int length, int *res)
 			//print_map(map, size);
 			tmp_value = get_result(map, size);
 				print_map(map, size);
+				getchar();
+				ft_putstr("_____________\n");
 				exit(0);
 			if (value > tmp_value)
 			{
@@ -81,7 +91,7 @@ void	permute(int size, int i, int length, int *res)
 	while (j < length)
 	{
 		ft_swap_tetr(&g_tetr_arr[i], &g_tetr_arr[j]);
-		permute(size, i + 1, length, res);
+		permute(size, i + 1, length, res, shift);
 		ft_swap_tetr(&g_tetr_arr[i], &g_tetr_arr[j]);
 		j++;
 	}
@@ -125,10 +135,16 @@ int		main(int argc, char** argv)
 //	}
 	size = ft_sqrt_map(i * 4);
 	tmp = i;
+	int		shift;
 	while (res == 0)
 	{
+		shift = 0;
 		map = create_map(size);
-		permute(size, 0, i, &res);
+		while (shift < size*size)
+		{
+			permute(size, 0, i, &res, shift);
+			shift++;
+		}
 		tmp++;
 		size = ft_sqrt_map(tmp * 4);
 	}

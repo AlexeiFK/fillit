@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:51:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/24 17:39:14 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/24 20:10:21 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,15 @@ void		write_in_map(char **map, int i, int j, int id)
 	}
 }
 
-int			add_figure(char **map, int id)
+int			add_figure(char **map, int id, int shift)
 {
 	int		i;
 	int		j;
 
-	i = 0;
+	i = (shift / 4);
+	j = (shift % 4);
 	while (i < g_size)
 	{
-		j = 0;
 		while (j < g_size)
 		{
 			if (map[i][j] == '.')
@@ -120,6 +120,7 @@ int			add_figure(char **map, int id)
 			}
 			j++;
 		}
+		j = 0;
 		i++;
 	}
 	return (0);
