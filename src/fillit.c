@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:51:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/25 20:49:54 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/25 21:18:02 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,13 @@ void		rem_figure(char **map, int id, int i, int j)
 	}
 }
 
-int			add_figure(char **map, int id, int shift, int *crd)
+int			add_figure(char **map, int id, int *shift, int *crd)
 {
 	int		i;
 	int		j;
 
-	i = (shift / g_size);
-	j = (shift % g_size);
+	i = (*shift / g_size);
+	j = (*shift % g_size);
 	while (i < g_size)
 	{
 		while (j < g_size)
@@ -146,6 +146,9 @@ int			add_figure(char **map, int id, int shift, int *crd)
 					write_in_map(map, i, j, id);
 					crd[0] = i;
 					crd[1] = j;
+					*shift = i * g_size;
+					*shift = *shift + j;
+			//		*shift = *shift - 1;
 					return (1);
 				}
 			}
