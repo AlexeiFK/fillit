@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/24 23:24:31 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/25 20:54:07 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	permute(int size, int i, int length, int *res, int shift)
 			//print_map(map, size);
 			tmp_value = get_result(map, size);
 				print_map(map, size);
-				getchar();
+//				getchar();
 				ft_putstr("_____________\n");
 				exit(0);
 			if (value > tmp_value)
@@ -135,7 +135,7 @@ int		main(int argc, char** argv)
 //	}
 	size = ft_sqrt_map(i * 4);
 	tmp = i;
-	int		shift;
+/*	int		shift;
 	while (res == 0)
 	{
 		shift = 0;
@@ -148,7 +148,24 @@ int		main(int argc, char** argv)
 		tmp++;
 		size = ft_sqrt_map(tmp * 4);
 	}
-	print_map(g_map, size);
+	*/
+//	map = create_map(size);
+//	int crd[2];
+	int ret1;
+
+	ret1 = 0;
+	while (!ret1)
+	{
+		map = create_map(size);
+		ret1 = f_map(size, map, 0, i);
+		tmp++;
+		size = ft_sqrt_map(tmp * 4);
+	}
+//	add_figure(map, 0, 0, crd);
+//	add_figure(map, 1, 0, crd);
+//	print_map(g_map, size);
+//	rem_figure(map, 1, crd[0], crd[1]);
+//	print_map(g_map, size);
 	close(fd);
 	return (0);
 }

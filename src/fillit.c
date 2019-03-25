@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:51:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/24 20:10:21 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/25 20:49:54 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ int		check_space(char **map, int i, int j, int id)
 					return (0);
 				if ((i + 1) > g_size)
 					return (0);
+				if (j < 0)
+					return (0);
+				if (i < 0)
+					return (0);
 				if (map[i][j] != '.')
 					return (0);
 //				j++;
@@ -69,15 +73,12 @@ void		write_in_map(char **map, int i, int j, int id)
 	int			t_i;
 	int			t_j;
 
-//	printf("write in i = %d, j = %d\n", i, j);
 	if (g_tetr_arr[id]->arr[0][0] == '.')
 	{
 		if (g_tetr_arr[id]->arr[0][1] == '.')
 			j--;
 		j--;
 	}
-//	if (g_tetr_arr[id]->arr[0][1] == '.')
-//		j--;
 	t_i = 0;
 	while (t_i < 4)
 	{
@@ -97,24 +98,54 @@ void		write_in_map(char **map, int i, int j, int id)
 	}
 }
 
-int			add_figure(char **map, int id, int shift)
+void		rem_figure(char **map, int id, int i, int j)
+{
+	int			t_i;
+	int			t_j;
+
+	if (g_tetr_arr[id]->arr[0][0] == '.')
+	{
+		if (g_tetr_arr[id]->arr[0][1] == '.')
+			j--;
+		j--;
+	}
+	t_i = 0;
+	while (t_i < 4)
+	{
+		t_j = 0;
+		while (t_j < 4)
+		{
+			if (g_tetr_arr[id]->arr[t_i][t_j] != '.')
+			{	
+				(map[i][j] = '.');
+			}
+			j++;
+			t_j++;
+		}
+		j -= 4;
+		i++;
+		t_i++;
+	}
+}
+
+int			add_figure(char **map, int id, int shift, int *crd)
 {
 	int		i;
 	int		j;
 
-	i = (shift / 4);
-	j = (shift % 4);
+	i = (shift / g_size);
+	j = (shift % g_size);
 	while (i < g_size)
 	{
 		while (j < g_size)
 		{
 			if (map[i][j] == '.')
 			{
-//				printf("i = %d, j = %d\n", i, j);
 				if (check_space(map, i, j, id) == 1)
 				{
-//					printf("Check sp = 1 for %d write in i = %d j = %d\n", id, i ,j);
 					write_in_map(map, i, j, id);
+					crd[0] = i;
+					crd[1] = j;
 					return (1);
 				}
 			}

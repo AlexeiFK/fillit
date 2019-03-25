@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 20:29:29 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/24 20:11:11 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/25 19:56:33 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int				to_find(char *str, int i);
 int				get_figures(int fd);
 char			**create_map(int size);
 char			**fill_map(int size, int n_fig, int *flag, int shift);
+int				f_map(int size, char **map, int i, int n_fig);
 void			print_map(char **map, int i);
-int				add_figure(char **map, int id, int shift);
+int				add_figure(char **map, int id, int shift, int *crd);
+void			rem_figure(char **map, int id, int i, int j);
 void			ft_swap_tetr(t_tetr **x, t_tetr **y);
 int				ft_sqrt_map(int num);
 
