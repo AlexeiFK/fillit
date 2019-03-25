@@ -6,13 +6,14 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:54:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/24 18:37:32 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/25 23:24:19 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "get_next_line.h"
 #include "libft.h"
+#include "fillit.h"
 
 int			searcher(char *str, int *n_sharp, int *n_tetr)
 {
@@ -31,32 +32,39 @@ int			searcher(char *str, int *n_sharp, int *n_tetr)
 	return (1);
 }
 
+static void	check_error(int ret, char *str)
+{
+	if (str != NULL)
+		free(str);
+	if (ret == -1)
+		ft_error_msg();
+}
+
 int			checker(int fd, int n_tetr, int n_sharp, char *str)
 {
-	while (get_next_line(fd, &str) == 1)
+	int ret;
+
+	while ((ret = get_next_line(fd, &str)) == 1)
 	{
 		if (ft_strlen(str) == 4)
 		{
 			if (!searcher(str, &n_sharp, &n_tetr))
 				return (0);
 		}
+		else if ((n_tetr % 4) != 0)
+			return (0);
 		else
 		{
-			if ((n_tetr % 4) != 0)
+			if (n_sharp != 4)
 				return (0);
-			else
-			{
-				if (n_sharp != 4)
-					return (0);
-				n_tetr = 0;
-				n_sharp = 0;
-			}
+			n_tetr = 0;
+			n_sharp = 0;
 		}
 		free(str);
 	}
 	if (n_sharp != 4)
 		return (0);
-	free(str);
+	check_error(ret, str);
 	return (1);
 }
 
@@ -64,10 +72,11 @@ int			checker_plus(int fd, char *str)
 {
 	int		i;
 	int		n_figs;
+	int		ret;
 
 	n_figs = 1;
 	i = 0;
-	while (get_next_line(fd, &str) == 1)
+	while ((ret = get_next_line(fd, &str)) == 1)
 	{
 		if ((ft_strlen(str) == 4) && (i < 4))
 		{
@@ -76,15 +85,13 @@ int			checker_plus(int fd, char *str)
 		else
 		{
 			if (ft_strlen(str) != 0)
-			{
 				return (0);
-			}
 			n_figs++;
 			i = 0;
 		}
 		free(str);
 	}
-	free(str);
+	check_error(ret, str);
 	return (n_figs);
 }
 

@@ -6,11 +6,9 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/25 20:54:07 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/25 23:06:03 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -19,153 +17,61 @@
 #include "fillit.h"
 #include <fcntl.h>
 
-int		g_result = 0;
-char	**g_map = NULL;
-
-int		get_result(char **map, int size)
+void			ft_error_msg(void)
 {
-	int	i;
-	int	j;
-	int	val;
-
-	i = 0;
-	val = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			if (map[i][j] != '.')
-			{
-				val = val + j;
-				val = val + i;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (val);
+	ft_putstr("error");
+	exit(0);
 }
 
-void	permute(int size, int i, int length, int *res, int shift) 
+static void		usage_msg(void)
 {
-	int			j;
-	char		**map;
-	int			flag;
-	static int	value = VALUE_MAX;
-	int			tmp_value;
-//	int			shift;
-
-//	shift = 0;
-	if (length == i)
-	{
-		flag = 0;
-//		while (shift < size*size)
-//		{
-			map = fill_map(size, length, &flag, shift);
-			shift++;
-//			if (flag)
-//				break ;
-//		}
-		if (flag)
-		{
-			*res = 1;
-//			ft_putchar('\n');
-			//print_map(map, size);
-			tmp_value = get_result(map, size);
-				print_map(map, size);
-//				getchar();
-				ft_putstr("_____________\n");
-				exit(0);
-			if (value > tmp_value)
-			{
-			//	print_map(map, size);
-				value = tmp_value;
-				g_map = map;
-			//	printf("VALUE = %d\n", get_result(map, size));
-			}
-		}
-		return ;
-	}
-	j = i;
-	while (j < length)
-	{
-		ft_swap_tetr(&g_tetr_arr[i], &g_tetr_arr[j]);
-		permute(size, i + 1, length, res, shift);
-		ft_swap_tetr(&g_tetr_arr[i], &g_tetr_arr[j]);
-		j++;
-	}
-	return ;
+	ft_putstr("usage: ./fillit source_file");
+	exit(0);
 }
 
-int		main(int argc, char** argv)
+static int		get_figs_from_file(char *filename)
 {
+	int		n_figs;
 	int		fd;
-	int		i;
-//	int		j;
-	int		res;
-	int		size;
-	int		tmp;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		ft_error_msg();
+	n_figs = get_figures(fd);
+	close(fd);
+	return (n_figs);
+}
+
+static void		resolve_fillit(int n_figs)
+{
+	int		ret;
+	int		size_of_map;
+	int		size_of_side;
 	char	**map;
 
-	res = 0;
-	if (argc != 2)
+	ret = 0;
+	size_of_map = ft_sqrt_map(n_figs * 4);
+	size_of_side = n_figs;
+	while (!ret)
 	{
-		ft_putstr("usage:\n");
-		return (0);
+		map = create_map(size_of_map);
+		ret = f_map(size_of_map, map, 0, n_figs);
+		size_of_side++;
+		size_of_map = ft_sqrt_map(size_of_side * 4);
 	}
-	i = 0;
-	if (is_valid(argv[1]) == 0)
-	{
-		ft_putstr("error");
-		exit(0);
-	}
-	fd = open(argv[1], O_RDONLY);
-	i = get_figures(fd);
-	if (i != is_valid(argv[1]))
-	{
-		ft_putstr("error");
-		exit(0);
-	}
-//	j = 0;
-//	while ((j < 26) && (g_figs[j] > 0))
-//	{
-//		printf("[%d] = %d\n", j, g_figs[j]);
-//		j++;
-//	}
-	size = ft_sqrt_map(i * 4);
-	tmp = i;
-/*	int		shift;
-	while (res == 0)
-	{
-		shift = 0;
-		map = create_map(size);
-		while (shift < size*size)
-		{
-			permute(size, 0, i, &res, shift);
-			shift++;
-		}
-		tmp++;
-		size = ft_sqrt_map(tmp * 4);
-	}
-	*/
-//	map = create_map(size);
-//	int crd[2];
-	int ret1;
+}
 
-	ret1 = 0;
-	while (!ret1)
-	{
-		map = create_map(size);
-		ret1 = f_map(size, map, 0, i);
-		tmp++;
-		size = ft_sqrt_map(tmp * 4);
-	}
-//	add_figure(map, 0, 0, crd);
-//	add_figure(map, 1, 0, crd);
-//	print_map(g_map, size);
-//	rem_figure(map, 1, crd[0], crd[1]);
-//	print_map(g_map, size);
-	close(fd);
+int				main(int argc, char **argv)
+{
+	int		n_figs;
+
+	if (argc != 2)
+		usage_msg();
+	if (is_valid(argv[1]) == 0)
+		ft_error_msg();
+	n_figs = get_figs_from_file(argv[1]);
+	if (n_figs != is_valid(argv[1]))
+		ft_error_msg();
+	resolve_fillit(n_figs);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:51:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/25 21:18:02 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/25 22:57:05 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,53 +17,50 @@
 
 int		g_size = 0;
 
-int		check_space(char **map, int i, int j, int id)
+static int	is_out_of_bounds(int i, int j)
+{
+	if ((j + 1) > g_size)
+		return (0);
+	if ((i + 1) > g_size)
+		return (0);
+	if (j < 0)
+		return (0);
+	if (i < 0)
+		return (0);
+	return (1);
+}
+
+static void	inc(int *i, int *j)
+{
+	(*i)++;
+	(*j)++;
+}
+
+int			check_space(char **map, int i, int j, int id)
 {
 	int			t_i;
 	int			t_j;
-	int			flag;
 	int			temp_j;
 
 	t_i = 0;
-	if (g_tetr_arr[id]->arr[0][0] == '.')
-	{
-		j--;
-		if (g_tetr_arr[id]->arr[0][1] == '.')
-			j--;
-	}
+	adjustment(id, &j);
 	temp_j = j;
-	flag = 0;
-//	printf("__________________\n");
 	while (t_i < 4)
 	{
 		t_j = 0;
-	//	j -= 4;
 		while (t_j < 4)
 		{
-//			printf("t_i = %d t_j = %d, i = %d, j = %d for id = %d\n", t_i, t_j, i, j, id);
 			if (g_tetr_arr[id]->arr[t_i][t_j] != '.')
 			{
-//				flag++;
-				if ((j + 1) > g_size)
-					return (0);
-				if ((i + 1) > g_size)
-					return (0);
-				if (j < 0)
-					return (0);
-				if (i < 0)
+				if (!(is_out_of_bounds(i, j)))
 					return (0);
 				if (map[i][j] != '.')
 					return (0);
-//				j++;
 			}
-//			if (flag)
-				j++;
-			t_j++;
+			inc(&j, &t_j);
 		}
 		j = temp_j;
-		flag = 0;
-		i++;
-		t_i++;
+		inc(&i, &t_i);
 	}
 	return (1);
 }
@@ -73,12 +70,7 @@ void		write_in_map(char **map, int i, int j, int id)
 	int			t_i;
 	int			t_j;
 
-	if (g_tetr_arr[id]->arr[0][0] == '.')
-	{
-		if (g_tetr_arr[id]->arr[0][1] == '.')
-			j--;
-		j--;
-	}
+	adjustment(id, &j);
 	t_i = 0;
 	while (t_i < 4)
 	{
@@ -86,9 +78,7 @@ void		write_in_map(char **map, int i, int j, int id)
 		while (t_j < 4)
 		{
 			if (g_tetr_arr[id]->arr[t_i][t_j] != '.')
-			{	
 				(map[i][j] = g_tetr_arr[id]->arr[t_i][t_j]);
-			}
 			j++;
 			t_j++;
 		}
@@ -98,94 +88,6 @@ void		write_in_map(char **map, int i, int j, int id)
 	}
 }
 
-void		rem_figure(char **map, int id, int i, int j)
-{
-	int			t_i;
-	int			t_j;
-
-	if (g_tetr_arr[id]->arr[0][0] == '.')
-	{
-		if (g_tetr_arr[id]->arr[0][1] == '.')
-			j--;
-		j--;
-	}
-	t_i = 0;
-	while (t_i < 4)
-	{
-		t_j = 0;
-		while (t_j < 4)
-		{
-			if (g_tetr_arr[id]->arr[t_i][t_j] != '.')
-			{	
-				(map[i][j] = '.');
-			}
-			j++;
-			t_j++;
-		}
-		j -= 4;
-		i++;
-		t_i++;
-	}
-}
-
-int			add_figure(char **map, int id, int *shift, int *crd)
-{
-	int		i;
-	int		j;
-
-	i = (*shift / g_size);
-	j = (*shift % g_size);
-	while (i < g_size)
-	{
-		while (j < g_size)
-		{
-			if (map[i][j] == '.')
-			{
-				if (check_space(map, i, j, id) == 1)
-				{
-					write_in_map(map, i, j, id);
-					crd[0] = i;
-					crd[1] = j;
-					*shift = i * g_size;
-					*shift = *shift + j;
-			//		*shift = *shift - 1;
-					return (1);
-				}
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (0);
-}
-
-
-
-
-/*
-void		get_p(int *p[], int fig)
-{
-	i
-}
-
-int			is_out()
-{
-}
-
-int			num_to_fig(char **map, int i, int j, int fig)
-{
-	int		ret;
-	int		p[6];
-
-	get_p(&p, fig);
-	ret = 0;
-	if (((i + 1) > g_size) && ((i + 1) > g_size) && map[i + 1][j] == '.')
-		if (((i + 1) > g_size) && ((i + 1) > g_size) && map[i][j + 1] == '.')
-			if (((i + 1) > g_size) && ((i + 1) > g_size) && map[i + 1][j + 1] == '.')
-				ret = 1;
-}
-*/
 char		**create_map(int size)
 {
 	char	**map;

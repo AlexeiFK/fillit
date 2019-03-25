@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 21:23:39 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/18 18:56:28 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/25 21:58:23 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		vert_like(char *str, int i)
 		if (str[i + 4] == '#')
 			return (8);
 		if (down_right(str, i + 6) == 2)
-			return (5); 
+			return (5);
 		if (down_right(str, i + 6) == 1)
 			return (19);
 	}
