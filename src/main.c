@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 20:52:31 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/26 21:45:50 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void		resolve_fillit(int n_figs)
 		ret = f_map(size_of_map, map, 0, n_figs);
 		free_map(map, size_of_map, 0);
 		if (ret == 1)
-			free_figures(n_figs);
+			free_figures(26);
 		size_of_side++;
 		size_of_map = ft_sqrt_map(size_of_side * 4);
 	}
@@ -74,7 +74,10 @@ int				main(int argc, char **argv)
 		ft_error_msg();
 	n_figs = get_figs_from_file(argv[1]);
 	if (n_figs != is_valid(argv[1]))
+	{
+		free_figures(26);
 		ft_error_msg();
+	}
 	resolve_fillit(n_figs);
 	return (0);
 }

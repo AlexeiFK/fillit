@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:14:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 21:32:37 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/26 21:50:35 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		reader(int fd, char **str, int *start)
 	while ((*str)[i] != '#')
 		i++;
 	ret = to_find(*str, i);
+	if (ret == 0)
+		free(*str);
 	*start = i;
 	return (ret);
 }
