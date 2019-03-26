@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 22:23:35 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/25 22:48:26 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/26 21:20:21 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,6 @@ void		adjustment(int id, int *j)
 		if (g_tetr_arr[id]->arr[0][1] == '.')
 			(*j)--;
 		(*j)--;
-	}
-}
-
-void		rem_figure(char **map, int id, int i, int j)
-{
-	int			t_i;
-	int			t_j;
-
-	adjustment(id, &j);
-	t_i = 0;
-	while (t_i < 4)
-	{
-		t_j = 0;
-		while (t_j < 4)
-		{
-			if (g_tetr_arr[id]->arr[t_i][t_j] != '.')
-			{
-				(map[i][j] = '.');
-			}
-			j++;
-			t_j++;
-		}
-		j -= 4;
-		i++;
-		t_i++;
 	}
 }
 

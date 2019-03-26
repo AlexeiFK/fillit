@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:14:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/24 19:01:02 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/26 21:32:37 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "libft.h"
+#include "get_next_line.h"
 #include <stdio.h>
 
 int		g_figs[26];
@@ -38,6 +39,27 @@ int		reader(int fd, char **str, int *start)
 	ret = to_find(*str, i);
 	*start = i;
 	return (ret);
+}
+
+int		read_til_end(int fd, char *str)
+{
+	free(str);
+	while (get_next_line(fd, &str) > 0)
+		free(str);
+	free(str);
+	return (0);
+}
+
+void	free_figures(int n)
+{
+	int		i;
+
+	i = 0;
+	while (i < n)
+	{
+		free(g_tetr_arr[i]);
+		i++;
+	}
 }
 
 int		get_figures(int fd)
