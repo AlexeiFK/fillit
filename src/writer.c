@@ -18,9 +18,6 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-int		g_figs[26];
-t_tetr	*g_tetr_arr[26];
-
 int		reader(int fd, char **str, int *start)
 {
 	int		i;
@@ -52,19 +49,19 @@ int		read_til_end(int fd, char *str)
 	return (0);
 }
 
-void	free_figures(int n)
+void	free_figures(int n, t_fi *f)
 {
 	int		i;
 
 	i = 0;
 	while (i < n)
 	{
-		free(g_tetr_arr[i]);
+		free(f->tetr_arr[i]);
 		i++;
 	}
 }
 
-int		get_figures(int fd)
+int		get_figures(int fd, t_fi *f)
 {
 	int		ret;
 	int		i;
@@ -75,16 +72,16 @@ int		get_figures(int fd)
 	ret = 0;
 	i = 0;
 	start = 0;
-	while ((i < 26) && (ret != -1))
+	while ((i <= 26) && (ret != -1))
 	{
 		if ((ret = reader(fd, &str, &start)) == 0)
 			break ;
-		g_figs[i] = ret;
+		f->figs[i] = ret;
 		if (ret == 8 || ret == 10 || ret == 13 || ret == 17 || ret == 18)
 			start--;
 		if (ret == 6)
 			start -= 2;
-		g_tetr_arr[i] = create_tetr(ret, str, start);
+		f->tetr_arr[i] = create_tetr(str, start);
 		read(fd, str, 1);
 		free(str);
 		i++;

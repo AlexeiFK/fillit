@@ -80,22 +80,23 @@ char	**mapcpy(char **map, int size)
 	return (new);
 }
 
-int		f_map(int size, char **p_map, int i, int n_fig)
+int		f_map(t_fi *f, char **p_map, int i, int n_fig)
 {
 	char	**map;
-	int		crd[2];
 	int		shift;
 	int		ret;
+	int		size;
 
+	size = f->size;
 	shift = 0;
 	if (i == n_fig)
 		return (print_map(p_map, size));
 	while (shift < size * size)
 	{
 		map = mapcpy(p_map, size);
-		if ((ret = (add_figure(map, i, &shift, crd))))
+		if ((ret = (add_figure(map, i, &shift, f))))
 		{
-			if (f_map(size, map, i + 1, n_fig))
+			if (f_map(f, map, i + 1, n_fig))
 				return (free_map(map, size, 1));
 			free_map(map, size, 0);
 		}

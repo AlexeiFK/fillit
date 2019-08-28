@@ -15,41 +15,40 @@
 #include <stdlib.h>
 #include "fillit.h"
 
-void		adjustment(int id, int *j)
+void		adjustment(int id, int *j, t_fi *f)
 {
-	if (g_tetr_arr[id]->arr[0][0] == '.')
+	if (f->tetr_arr[id]->arr[0][0] == '.')
 	{
-		if (g_tetr_arr[id]->arr[0][1] == '.')
+		if (f->tetr_arr[id]->arr[0][1] == '.')
 			(*j)--;
 		(*j)--;
 	}
 }
 
-static void	shift_n_save_crd(int *crd, int *shift, int i, int j)
+static void	shift_n_save_crd(int *shift, int size, int i, int j)
 {
-	crd[0] = i;
-	crd[1] = j;
-	*shift = i * g_size;
+	*shift = i * size;
 	*shift = *shift + j;
 }
 
-int			add_figure(char **map, int id, int *shift, int *crd)
+int			add_figure(char **map, int id, int *shift, t_fi *f)
 {
 	int		i;
 	int		j;
 
-	i = (*shift / g_size);
-	j = (*shift % g_size);
-	while (i < g_size)
+	i = (*shift / f->size);
+	j = (*shift % f->size);
+	f->id = id;
+	while (i < f->size)
 	{
-		while (j < g_size)
+		while (j < f->size)
 		{
 			if (map[i][j] == '.')
 			{
-				if (check_space(map, i, j, id) == 1)
+				if (check_space(map, i, j, f) == 1)
 				{
-					write_in_map(map, i, j, id);
-					shift_n_save_crd(crd, shift, i, j);
+					write_in_map(map, i, j, f);
+					shift_n_save_crd(shift, f->size, i, j);
 					return (1);
 				}
 			}

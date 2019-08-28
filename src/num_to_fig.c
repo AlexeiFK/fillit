@@ -67,7 +67,7 @@ void		tetr_add(t_tetr *new, char *str, int start)
 	c++;
 }
 
-t_tetr		*create_tetr(int id, char *str, int start)
+t_tetr		*create_tetr(char *str, int start)
 {
 	t_tetr		*new;
 	int			i;
@@ -87,7 +87,6 @@ t_tetr		*create_tetr(int id, char *str, int start)
 		i++;
 	}
 	i = 0;
-	id = 0;
 	tetr_add(new, str, start);
 	i = 0;
 	return (new);

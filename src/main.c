@@ -29,7 +29,7 @@ static void		usage_msg(void)
 	exit(0);
 }
 
-static int		get_figs_from_file(char *filename)
+static int		get_figs_from_file(char *filename, t_fi *f)
 {
 	int		n_figs;
 	int		fd;
@@ -37,12 +37,12 @@ static int		get_figs_from_file(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		ft_error_msg();
-	n_figs = get_figures(fd);
+	n_figs = get_figures(fd, f);
 	close(fd);
 	return (n_figs);
 }
 
-static void		resolve_fillit(int n_figs)
+static void		resolve_fillit(int n_figs, t_fi *f)
 {
 	int		ret;
 	int		size_of_map;
@@ -55,10 +55,11 @@ static void		resolve_fillit(int n_figs)
 	while (!ret)
 	{
 		map = create_map(size_of_map);
-		ret = f_map(size_of_map, map, 0, n_figs);
+		f->size = size_of_map;
+		ret = f_map(f, map, 0, n_figs);
 		free_map(map, size_of_map, 0);
 		if (ret == 1)
-			free_figures(26);
+			free_figures(n_figs, f);
 		size_of_side++;
 		size_of_map = ft_sqrt_map(size_of_side * 4);
 	}
@@ -67,17 +68,18 @@ static void		resolve_fillit(int n_figs)
 int				main(int argc, char **argv)
 {
 	int		n_figs;
+	t_fi		f;
 
 	if (argc != 2)
 		usage_msg();
 	if (is_valid(argv[1]) == 0)
 		ft_error_msg();
-	n_figs = get_figs_from_file(argv[1]);
+	n_figs = get_figs_from_file(argv[1], &f);
 	if (n_figs != is_valid(argv[1]))
 	{
-		free_figures(26);
+		free_figures(n_figs, &f);
 		ft_error_msg();
 	}
-	resolve_fillit(n_figs);
+	resolve_fillit(n_figs, &f);
 	return (0);
 }

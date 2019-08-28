@@ -15,13 +15,11 @@
 #include <stdlib.h>
 #include "fillit.h"
 
-int		g_size = 0;
-
-static int	is_out_of_bounds(int i, int j)
+static int	is_out_of_bounds(int i, int j, int size)
 {
-	if ((j + 1) > g_size)
+	if ((j + 1) > size)
 		return (0);
-	if ((i + 1) > g_size)
+	if ((i + 1) > size)
 		return (0);
 	if (j < 0)
 		return (0);
@@ -36,23 +34,23 @@ static void	inc(int *i, int *j)
 	(*j)++;
 }
 
-int			check_space(char **map, int i, int j, int id)
+int			check_space(char **map, int i, int j, t_fi *f)
 {
 	int			t_i;
 	int			t_j;
 	int			temp_j;
 
 	t_i = 0;
-	adjustment(id, &j);
+	adjustment(f->id, &j, f);
 	temp_j = j;
 	while (t_i < 4)
 	{
 		t_j = 0;
 		while (t_j < 4)
 		{
-			if (g_tetr_arr[id]->arr[t_i][t_j] != '.')
+			if (f->tetr_arr[f->id]->arr[t_i][t_j] != '.')
 			{
-				if (!(is_out_of_bounds(i, j)))
+				if (!(is_out_of_bounds(i, j, f->size)))
 					return (0);
 				if (map[i][j] != '.')
 					return (0);
@@ -65,20 +63,20 @@ int			check_space(char **map, int i, int j, int id)
 	return (1);
 }
 
-void		write_in_map(char **map, int i, int j, int id)
+void		write_in_map(char **map, int i, int j, t_fi *f)
 {
 	int			t_i;
 	int			t_j;
 
-	adjustment(id, &j);
+	adjustment(f->id, &j, f);
 	t_i = 0;
 	while (t_i < 4)
 	{
 		t_j = 0;
 		while (t_j < 4)
 		{
-			if (g_tetr_arr[id]->arr[t_i][t_j] != '.')
-				(map[i][j] = g_tetr_arr[id]->arr[t_i][t_j]);
+			if (f->tetr_arr[f->id]->arr[t_i][t_j] != '.')
+				(map[i][j] = f->tetr_arr[f->id]->arr[t_i][t_j]);
 			j++;
 			t_j++;
 		}
@@ -94,7 +92,6 @@ char		**create_map(int size)
 	int		i;
 	int		j;
 
-	g_size = size;
 	map = (char**)malloc(sizeof(char*) * size);
 	i = 0;
 	while (i < size)
