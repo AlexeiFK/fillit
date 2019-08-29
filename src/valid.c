@@ -6,13 +6,14 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:54:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 21:32:13 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:49:29 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "get_next_line.h"
 #include "libft.h"
+#include <stdlib.h>
 #include "fillit.h"
 
 static int	searcher(char *str, int *n_sharp, int *n_tetr)

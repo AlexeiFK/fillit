@@ -3,113 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccellado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 07:59:55 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/05 21:18:54 by rjeor-mo         ###   ########.fr       */
+/*   Created: 2019/08/22 23:08:39 by ccellado          #+#    #+#             */
+/*   Updated: 2019/08/22 23:48:57 by ccellado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
 
-static char		*ft_strjoinfr(char **s1, char const *s2)
+static char	*ft_conc(char *s1, char *s2)
 {
-	int		i;
-	int		j;
-	char	*new;
+	char	*conc;
 
-	i = 0;
-	if (!(*s1) || !s2)
-		return (NULL);
-	new = ft_strnew(ft_strlen(*s1) + ft_strlen(s2));
-	if (new == NULL)
-		return (NULL);
-	while ((*s1)[i])
+	if (!s1)
+		conc = ft_strdup(s2);
+	else
 	{
-		new[i] = (*s1)[i];
-		i++;
+		conc = ft_strjoin(s1, s2);
+		free(s1);
 	}
-	j = 0;
-	while (s2[j])
-	{
-		new[i] = s2[j];
-		j++;
-		i++;
-	}
-	free(*s1);
-	return (new);
+	return (conc);
 }
 
-static int		new_line_search(char *buffer, char **before, char **after)
+static void	heads_and_tails(char *curr, char **buff, char **line)
 {
-	int		i;
+	char	*head;
+	char	*head_temp;
 
-	i = 0;
-	while (buffer[i] != '\n')
-	{
-		if (buffer[i] == '\0')
-			return (0);
-		i++;
-	}
-	if (!(*before = ft_strsub(buffer, 0, i)))
-		return (-1);
-	if (!(*after = ft_strsub(buffer, i + 1, (ft_strlen(buffer) - (i + 1)))))
-		return (-1);
-	free(buffer);
-	return (1);
+	head = ft_strnew(BUFF_SIZE);
+	head_temp = head;
+	while (*curr != '\n')
+		*head++ = *curr++;
+	*head = '\0';
+	*line = ft_conc(*line, head_temp);
+	free(head_temp);
+	curr++;
+	*buff = ft_strdup(curr);
 }
 
-static int		gnl_reader(const int fd, char **line, char **content)
+static char	*buff_check(char **line, char **buff)
 {
-	int		num;
-	int		test;
-	char	*buffer;
-	char	*before;
+	char	*temp;
 
-	if (!(buffer = ft_strnew(BUFF_SIZE)))
-		return (-1);
-	while ((num = read(fd, buffer, BUFF_SIZE)) > 0)
+	temp = *buff;
+	if (ft_strchr(*buff, '\n'))
 	{
-		buffer[num] = '\0';
-		if ((test = new_line_search(buffer, &before, content)) == 1)
+		heads_and_tails(temp, buff, line);
+		free(temp);
+		temp = *buff;
+		return (temp);
+	}
+	else if (temp[0] != '\0')
+		*line = ft_conc(*line, *buff);
+	free(temp);
+	temp = *buff;
+	*buff = NULL;
+	return (*buff);
+}
+
+static int	find_next_line(int fd, char **buff, char **line, int *bytes)
+{
+	char	*curr;
+
+	curr = ft_strnew(BUFF_SIZE);
+	*line = NULL;
+	if (*buff)
+		if ((*buff = buff_check(line, buff)))
 		{
-			if (!(*line = ft_strjoinfr(line, before)))
-				return (-1);
-			free(before);
+			free(curr);
 			return (1);
 		}
-		if (test == 0)
-			if (!(*line = ft_strjoinfr(line, buffer)))
-				return (-1);
-		if (test == -1)
-			return (-1);
+	while ((*bytes = read(fd, curr, BUFF_SIZE)) > 0)
+	{
+		curr[*bytes] = '\0';
+		if (ft_strchr(curr, '\n'))
+		{
+			heads_and_tails(curr, buff, line);
+			free(curr);
+			return (1);
+		}
+		else
+			*line = ft_conc(*line, curr);
 	}
-	return (num);
+	free(curr);
+	return (0);
 }
 
-int				get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line)
 {
-	static char			*content = NULL;
-	int					num;
+	static char *buff[FD_HARD_LIMIT];
+	int			bytes;
 
-	if (!line || fd < 0)
+	bytes = 0;
+	if (fd < 0 || !line || BUFF_SIZE < 0 || read(fd, 0, 0) < 0)
 		return (-1);
-	if (!content)
-		content = ft_strnew(BUFF_SIZE);
-	if ((num = new_line_search(content, line, &content)) == 1)
+	find_next_line(fd, &buff[fd], line, &bytes);
+	if (*line)
 		return (1);
-	if (num == -1)
-		return (-1);
-	*line = ft_strnew(BUFF_SIZE);
-	ft_strcpy(*line, content);
-	free(content);
-	content = NULL;
-	num = gnl_reader(fd, line, &content);
-	if (num == 0 && *line[0] != '\0')
-		return (1);
-	if (num == 0)
-		return (0);
-	if (num == -1)
-		return (-1);
-	return (1);
+	return (0);
 }
