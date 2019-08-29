@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/29 19:07:29 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 22:16:02 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 void			ft_error_msg(void)
 {
-	ft_putstr("error");
+	ft_putstr("error\n");
 	exit(0);
 }
 
 static void		usage_msg(void)
 {
-	ft_putstr("usage: ./fillit source_file");
+	ft_putstr("usage: ./fillit source_file\n");
 	exit(0);
 }
 
