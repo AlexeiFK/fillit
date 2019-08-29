@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 20:29:29 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/29 15:41:34 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 18:57:05 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct	s_fi
 {
 	int			figs[26];
 	int			size;
-	t_tetr		*tetr_arr[26];
+	t_tetr		*tetr_arr[27];
 	int			id;
 }				t_fi;
 

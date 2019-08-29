@@ -6,13 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/29 15:41:31 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:07:29 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <libft.h>
+#include "libft.h"
 #include <unistd.h>
 #include "fillit.h"
 #include <fcntl.h>
@@ -36,7 +35,7 @@ static int		get_figs_from_file(char *filename, t_fi *f)
 	int		i;
 
 	i = 0;
-	while (i < 26)
+	while (i < 27)
 	{
 		f->tetr_arr[i] = NULL;
 		i++;
@@ -66,7 +65,7 @@ static void		resolve_fillit(int n_figs, t_fi *f)
 		ret = f_map(f, map, 0, n_figs);
 		free_map(map, size_of_map, 0);
 		if (ret == 1)
-			free_figures(26, f);
+			free_figures(27, f);
 		size_of_side++;
 		size_of_map = ft_sqrt_map(size_of_side * 4);
 	}
@@ -84,7 +83,7 @@ int				main(int argc, char **argv)
 	n_figs = get_figs_from_file(argv[1], &f);
 	if (n_figs != is_valid(argv[1]))
 	{
-		free_figures(26, &f);
+		free_figures(27, &f);
 		ft_error_msg();
 	}
 	resolve_fillit(n_figs, &f);

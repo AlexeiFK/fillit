@@ -6,17 +6,15 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 13:14:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 21:50:35 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:11:55 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "fillit.h"
-#include <unistd.h>
 #include <fcntl.h>
 #include "libft.h"
 #include "get_next_line.h"
-#include <stdio.h>
 
 int		reader(int fd, char **str, int *start)
 {
@@ -56,7 +54,8 @@ void	free_figures(int n, t_fi *f)
 	i = 0;
 	while (i < n)
 	{
-		free(f->tetr_arr[i]);
+		if (f->tetr_arr[i] != NULL)
+			free(f->tetr_arr[i]);
 		i++;
 	}
 }

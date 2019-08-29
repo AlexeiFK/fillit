@@ -6,14 +6,13 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:33:03 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/29 15:41:29 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:08:13 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 int		ft_sqrt_map(int num)
 {

@@ -6,13 +6,10 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 22:23:35 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 21:20:21 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:03:39 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "fillit.h"
 
 void		adjustment(int id, int *j, t_fi *f)

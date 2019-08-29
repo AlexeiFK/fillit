@@ -6,16 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 18:11:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 18:14:42 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 19:09:56 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "fillit.h"
-#include <unistd.h>
-#include <fcntl.h>
-#include "libft.h"
-#include <stdio.h>
 
 static void	get_starting_vars(int *i, int *sh, int *mv, int start)
 {
