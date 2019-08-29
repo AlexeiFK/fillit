@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/29 15:14:33 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:41:31 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,14 @@ static int		get_figs_from_file(char *filename, t_fi *f)
 {
 	int		n_figs;
 	int		fd;
+	int		i;
 
+	i = 0;
+	while (i < 26)
+	{
+		f->tetr_arr[i] = NULL;
+		i++;
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		ft_error_msg();
@@ -59,7 +66,7 @@ static void		resolve_fillit(int n_figs, t_fi *f)
 		ret = f_map(f, map, 0, n_figs);
 		free_map(map, size_of_map, 0);
 		if (ret == 1)
-			free_figures(n_figs, f);
+			free_figures(26, f);
 		size_of_side++;
 		size_of_map = ft_sqrt_map(size_of_side * 4);
 	}
@@ -77,7 +84,7 @@ int				main(int argc, char **argv)
 	n_figs = get_figs_from_file(argv[1], &f);
 	if (n_figs != is_valid(argv[1]))
 	{
-		free_figures(n_figs, &f);
+		free_figures(26, &f);
 		ft_error_msg();
 	}
 	resolve_fillit(n_figs, &f);

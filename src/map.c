@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:33:03 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 20:53:21 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:41:29 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int		free_map(char **map, int size, int ret)
 	i = 0;
 	while (i < size)
 	{
-		free(map[i]);
+		if (map[i] != NULL)
+			free(map[i]);
 		i++;
 	}
 	free(map);

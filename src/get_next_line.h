@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 07:55:38 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/11 20:30:41 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:28:42 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 
 int		get_next_line(const int fd, char **line);
 
-# define BUFF_SIZE 3
+# define BUFF_SIZE 1
 
 #endif
