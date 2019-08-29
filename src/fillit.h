@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 20:29:29 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 21:23:04 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:14:15 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ typedef struct	s_tetr
 
 typedef struct	s_fi
 {
-	int		figs[26];
-	int		size;
+	int			figs[26];
+	int			size;
 	t_tetr		*tetr_arr[26];
-	int		id;
-}		t_fi;
+	int			id;
+}				t_fi;
 
 t_tetr			*create_tetr(char *str, int start);
 void			tetr_add(t_tetr *tetr, char *str, int start);

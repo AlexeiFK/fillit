@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 17:39:06 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/26 21:45:50 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:14:33 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void		resolve_fillit(int n_figs, t_fi *f)
 
 int				main(int argc, char **argv)
 {
-	int		n_figs;
+	int			n_figs;
 	t_fi		f;
 
 	if (argc != 2)
